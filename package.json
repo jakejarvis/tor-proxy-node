@@ -1,0 +1,40 @@
+{
+  "name": "tor-proxy-node",
+  "version": "0.0.0",
+  "description": "Quickly serve up a Tor proxy of your static clearnet site.",
+  "license": "MIT",
+  "homepage": "https://github.com/jakejarvis/tor-proxy-node",
+  "author": {
+    "name": "Jake Jarvis",
+    "email": "jake@jarv.is",
+    "url": "https://jarv.is/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jakejarvis/tor-proxy-node.git"
+  },
+  "files": [
+    "lib",
+    "server.js"
+  ],
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "watch": "nodemon server.js",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "compression": "1.7.4",
+    "express": "4.17.1",
+    "get-port": "6.0.0",
+    "http-proxy-middleware": "2.0.1",
+    "tempy": "2.0.0"
+  },
+  "devDependencies": {
+    "@jakejarvis/eslint-config": "*",
+    "eslint": "^8.0.1",
+    "nodemon": "^2.0.13"
+  },
+  "keywords": []
+}
