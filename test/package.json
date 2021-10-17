@@ -7,7 +7,40 @@
   },
   "torProxy": {
     "proxyDomain": "https://jarv.is",
-    "serviceDir": "/Users/jake/jarvisxtejqytycck6q3idpfpwuh57zy2u2b3bcwv7vmod7schfophid.onion",
-    "nonAnonymous": true
+    "nonAnonymous": true,
+    "addHeaders": {
+      "content-security-policy": "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'",
+      "referrer-policy": "no-referrer",
+      "permissions-policy": "interest-cohort=()"
+    },
+    "removeHeaders": [
+      "onion-location",
+      "content-security-policy",
+      "feature-policy",
+      "permissions-policy",
+      "nel",
+      "server",
+      "report-to",
+      "access-control-allow-origin",
+      "access-control-allow-methods",
+      "strict-transport-security",
+      "x-content-type-options",
+      "x-frame-options",
+      "x-xss-protection",
+      "referrer-policy",
+      "vary",
+      "accept-ranges",
+      "connection",
+      "cache-control",
+      "content-length",
+      "age",
+      "date",
+      "etag",
+      "expires",
+      "pragma",
+      "x-nf-request-id",
+      "x-vercel-cache",
+      "x-view-source"
+    ]
   }
 }

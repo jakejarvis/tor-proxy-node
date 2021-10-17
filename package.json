@@ -29,6 +29,7 @@
   "dependencies": {
     "chokidar": "^3.5.2",
     "compression": "^1.7.4",
+    "consola": "^2.15.3",
     "express": "^4.17.1",
     "get-port": "^6.0.0",
     "http-proxy-middleware": "^2.0.1",
@@ -37,6 +38,8 @@
   },
   "devDependencies": {
     "@jakejarvis/eslint-config": "*",
+    "@types/compression": "^1.7.2",
+    "@types/express": "^4.17.13",
     "eslint": "^8.0.1"
   },
   "keywords": []

@@ -2,21 +2,19 @@ import { packageConfig } from "pkg-conf";
 import getPort from "get-port";
 import { startTor } from "./lib/tor.js";
 import { startProxy } from "./lib/proxy.js";
+import logger from "./lib/logger.js";
 
 (async () => {
   const config = await packageConfig("torProxy");
-  const httpPort = await getPort();
+  const httpPort = config.localPort || await getPort();
 
   const { hostname } = await startTor({
     port: httpPort,
-
-    // optional, will create ephemeral service without:
     serviceDir: config.serviceDir,
 
     // enables HiddenServiceNonAnonymousMode & HiddenServiceSingleHopMode, much faster
     nonAnonymous: config.nonAnonymous === true,
   });
-  console.log(hostname);
 
   startProxy({
     port: httpPort,
@@ -28,42 +26,11 @@ import { startProxy } from "./lib/proxy.js";
     onionDomain: `http://${hostname}`,
 
     // tor-only headers to add
-    addHeaders: {
-      "content-security-policy": "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'",
-      "referrer-policy": "no-referrer",
-      "permissions-policy": "interest-cohort=()",
-    },
+    addHeaders: config.addHeaders || {},
 
     // clearnet headers to remove from response (some may be automatically reset)
-    removeHeaders: [
-      "onion-location",
-      "content-security-policy",
-      "feature-policy",
-      "permissions-policy",
-      "nel",
-      "server",
-      "report-to",
-      "access-control-allow-origin",
-      "access-control-allow-methods",
-      "strict-transport-security",
-      "x-content-type-options",
-      "x-frame-options",
-      "x-xss-protection",
-      "referrer-policy",
-      "vary",
-      "accept-ranges",
-      "connection",
-      "cache-control",
-      "content-length",
-      "age",
-      "date",
-      "etag",
-      "expires",
-      "pragma",
-      "x-nf-request-id",
-      "x-vercel-cache",
-      "x-vercel-id",
-      "x-view-source",
-    ],
+    removeHeaders: config.removeHeaders || [],
   });
+
+  logger.success(`[TOR] Tor service will be live at: http://${hostname}`);
 })();
