@@ -6,6 +6,8 @@
     "tor-proxy-node": "../"
   },
   "torProxy": {
-    "proxyDomain": "https://jarv.is"
+    "proxyDomain": "https://jarv.is",
+    "serviceDir": "/Users/jake/jarvisxtejqytycck6q3idpfpwuh57zy2u2b3bcwv7vmod7schfophid.onion",
+    "nonAnonymous": true
   }
 }

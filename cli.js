@@ -1,4 +1,2 @@
 #!/usr/bin/env node
-import server from "./server.js";
-
-server();
+import "./server.js";

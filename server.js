@@ -3,7 +3,7 @@ import getPort from "get-port";
 import { startTor } from "./lib/tor.js";
 import { startProxy } from "./lib/proxy.js";
 
-const start = async () => {
+(async () => {
   const config = await packageConfig("torProxy");
   const httpPort = await getPort();
 
@@ -12,6 +12,9 @@ const start = async () => {
 
     // optional, will create ephemeral service without:
     serviceDir: config.serviceDir,
+
+    // enables HiddenServiceNonAnonymousMode & HiddenServiceSingleHopMode, much faster
+    nonAnonymous: config.nonAnonymous === true,
   });
   console.log(hostname);
 
@@ -63,6 +66,4 @@ const start = async () => {
       "x-view-source",
     ],
   });
-};
-
-export default start;
+})();
