@@ -15,26 +15,29 @@
   },
   "files": [
     "lib",
-    "server.js"
+    "server.js",
+    "cli.js"
   ],
   "main": "server.js",
   "type": "module",
+  "bin": {
+    "tor-proxy": "cli.js"
+  },
   "scripts": {
-    "start": "node server.js",
-    "watch": "nodemon server.js",
     "lint": "eslint ."
   },
   "dependencies": {
-    "compression": "1.7.4",
-    "express": "4.17.1",
-    "get-port": "6.0.0",
-    "http-proxy-middleware": "2.0.1",
-    "tempy": "2.0.0"
+    "chokidar": "^3.5.2",
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "get-port": "^6.0.0",
+    "http-proxy-middleware": "^2.0.1",
+    "pkg-conf": "^4.0.0",
+    "tempy": "^2.0.0"
   },
   "devDependencies": {
     "@jakejarvis/eslint-config": "*",
-    "eslint": "^8.0.1",
-    "nodemon": "^2.0.13"
+    "eslint": "^8.0.1"
   },
   "keywords": []
 }

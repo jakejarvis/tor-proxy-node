@@ -1,19 +1,28 @@
+import { packageConfig } from "pkg-conf";
 import getPort from "get-port";
 import { startTor } from "./lib/tor.js";
 import { startProxy } from "./lib/proxy.js";
 
-(async () => {
+const start = async () => {
+  const config = await packageConfig("torProxy");
   const httpPort = await getPort();
-  const onionDomain = "http://jarvis2i2vp4j4tbxjogsnqdemnte5xhzyi7hziiyzxwge3hzmh57zad.onion";
+
+  const { hostname } = await startTor({
+    port: httpPort,
+
+    // optional, will create ephemeral service without:
+    serviceDir: config.serviceDir,
+  });
+  console.log(hostname);
 
   startProxy({
     port: httpPort,
 
     // base URL to proxy to
-    origin: "https://jarv.is",
+    origin: config.proxyDomain,
 
     // optionally set to "" for all relative URIs
-    onionDomain: onionDomain,
+    onionDomain: `http://${hostname}`,
 
     // tor-only headers to add
     addHeaders: {
@@ -52,19 +61,8 @@ import { startProxy } from "./lib/proxy.js";
       "x-vercel-cache",
       "x-vercel-id",
       "x-view-source",
-      "x-got-milk",
     ],
   });
+};
 
-  startTor({
-    port: httpPort,
-
-    // config option 1:
-    // serviceDir: "/var/lib/tor/my_hidden_service",
-
-    // config option 2:
-    hostname: onionDomain,
-    pubKey: "asdf",
-    privKey: "1234",
-  });
-})();
+export default start;

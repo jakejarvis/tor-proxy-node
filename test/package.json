@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "start": "tor-proxy"
+  },
+  "dependencies": {
+    "tor-proxy-node": "../"
+  },
+  "torProxy": {
+    "proxyDomain": "https://jarv.is"
+  }
+}
