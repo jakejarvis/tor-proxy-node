@@ -9,6 +9,7 @@ import logger from "./lib/logger.js";
   const httpPort = config.localPort || await getPort();
 
   const { hostname } = await startTor({
+    binary: config.binary || "tor",
     port: httpPort,
     serviceDir: config.serviceDir,
 

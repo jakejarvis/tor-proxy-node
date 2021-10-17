@@ -6,6 +6,7 @@
     "tor-proxy-node": "../"
   },
   "torProxy": {
+    "binary": "/opt/homebrew/bin/tor",
     "proxyDomain": "https://jarv.is",
     "nonAnonymous": true,
     "addHeaders": {
