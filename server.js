@@ -33,5 +33,5 @@ import logger from "./lib/logger.js";
     removeHeaders: config.removeHeaders || [],
   });
 
-  logger.success(`[TOR] Tor service will be live at: http://${hostname}`);
+  logger.success(`Tor service will be live at: http://${hostname}`);
 })();
