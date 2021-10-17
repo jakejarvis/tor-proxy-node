@@ -1,5 +1,5 @@
 {
-  "name": "tor-proxy-node",
+  "name": "tor-proxy",
   "version": "0.0.0",
   "description": "Quickly serve up a Tor proxy of your static clearnet site.",
   "license": "MIT",
