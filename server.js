@@ -1,14 +1,12 @@
-import { packageConfig } from "pkg-conf";
 import getPort from "get-port";
 import { startTor } from "./lib/tor.js";
 import { startProxy } from "./lib/proxy.js";
 import logger from "./lib/logger.js";
 
-(async () => {
-  const config = await packageConfig("torProxy");
+const server = async (config) => {
   const httpPort = config.localPort || await getPort();
 
-  const { hostname } = await startTor({
+  const tor = await startTor({
     binary: config.binary || "tor",
     port: httpPort,
     serviceDir: config.serviceDir,
@@ -24,14 +22,16 @@ import logger from "./lib/logger.js";
     origin: config.proxyDomain,
 
     // optionally set to "" for all relative URIs
-    onionDomain: `http://${hostname}`,
+    onionDomain: `http://${tor.hostname}`,
 
-    // tor-only headers to add
+    // tor-only headers to add/overwrite
     addHeaders: config.addHeaders || {},
 
     // clearnet headers to remove from response (some may be automatically reset)
     removeHeaders: config.removeHeaders || [],
   });
 
-  logger.success(`Tor service will be live at: http://${hostname}`);
-})();
+  logger.success(`Tor service will be live at: http://${tor.hostname}`);
+};
+
+export default server;
