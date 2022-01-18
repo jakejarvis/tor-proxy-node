@@ -27,7 +27,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "chokidar": "^3.5.2",
+    "chokidar": "^3.5.3",
     "compression": "^1.7.4",
     "consola": "^2.15.3",
     "express": "^4.17.1",
